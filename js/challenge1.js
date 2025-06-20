@@ -9,7 +9,56 @@
     y devuelva una nueva lista sin duplicados, ordenada en orden ascendente.
 */
 
-const prepareGifts = gifts => [ ...new Set(gifts) ].sort((a, b) => a - b);
+function prepareGifts(gifts) {
+    const buffer = {};
+
+    for(const number of gifts) {
+        buffer[number] = number
+    }
+
+    return Object.values(buffer);
+}
+
+/*
+    Forma 3: 
+
+    const prepareGifts = gifts => [ ... new Set(gifts) ].sort((a, b) => a - b);
+
+    const prepareGifts = gifts => Array.from(new Set(gifts)).sort((a, b) => a - b);
+
+*/
+
+/*
+    Forma 1: 
+
+    function prepareGifts(gifts) {
+        const newArray = [];
+
+        for (let i = 0; i < gifts.length; i++) {
+            if(!newArray.includes(gifts[i])) {
+                newArray.push(gifts[i])
+            }
+        }
+
+        newArray.sort((a, b) => a - b);
+
+        return newArray;
+    }
+*/
+
+/*
+    Forma 2:
+    
+    function prepareGifts(gifts) {
+        const newArray = [];
+
+        for(let number of gifts) {
+            if(!newArray.includes(number)) newArray.push(number)
+        }
+
+        return newArray.sort((a, b) => a - b);
+    }
+*/
 
 const gifts1 = [3, 1, 2, 3, 4, 2, 5]
 const preparedGifts1 = prepareGifts(gifts1)
