@@ -12,25 +12,19 @@
     - Debes asegurarte de que el árbol tenga la forma correcta usando saltos de línea \n para cada línea.
 */
 
-/*
-function createXmasTree(height, ornament) {
-    let tree = "";
+// function createXmasTree(height, ornament) {
+//     let tree = "";
 
-    const trunk = `${"_".repeat(height - 1)}#${"_".repeat(height - 1)}`;
+//     const trunk = `${"_".repeat(height - 1)}#${"_".repeat(height - 1)}`;
 
-    let numberOrnaments = 1;
+//     for (let i = 1; i <= height; i++) {
+//         tree += `${"_".repeat(height - i)}${ornament.repeat(i * 2 - 1)}${"_".repeat(height - i)}\n`;
+//     }
 
-    for (let i = height; i > 0; i--) {
-        tree += `${"_".repeat(i - 1)}${ornament.repeat(numberOrnaments)}${"_".repeat(i - 1)}\n`;
-        
-        numberOrnaments = numberOrnaments + 2;
-    }
+//     tree += `${trunk}\n${trunk}`;
 
-    tree += [ trunk, trunk ].join('\n');
-
-    return tree;
-}
-*/
+//     return tree;
+// }
 
 function createXmasTree(height, ornament) {
     const treeLines = Array.from({ length: height }, (_, i) => {

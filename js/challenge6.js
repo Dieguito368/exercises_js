@@ -12,31 +12,56 @@
     Y debemos devolver true si el * está dentro de la caja y false en caso contrario.
 */
 
+// function inBox(box) {
+//     const array = [ ...box ];
+    
+//     const content = []
+
+//     for (let i = 1; i < array.length - 1; i++) {
+//         content.push([ ...array[i] ].slice(1, array.length - 1));
+//     }
+    
+//     return [ ...content.join("") ].includes("*");
+// }
 
 function inBox(box) {
-    const array = [ ...box ]
-    
-    const upBorder = array[0]
-    const downBorder = array[array.length - 1];
-    const rightBorder = [];
-    const leftBorder = [];
-    const content = []
+    for (let i = 1; i < box.length - 1; i++) {
+        const row = box[i];
 
-    for (let i = 0; i < array.length; i++) {
-        if(i !== 0 && i !== (array.length - 1)) {
-            content.push([ ...array[i] ].slice(1, array.length - 1));
-            
-            leftBorder.push([...array[i]][0]);
-            rightBorder.push([...array[i]][[...array[i]].length - 1]);
+        for (let j = 1; j < row.length - 1; j++) {
+            if(row[j] === "*") {
+                return true
+            }
         }
     }
 
-    const hasGift = [ ...content.join(" ") ].includes("*");
-    
-    const hasBorder = ![ ...upBorder, ...downBorder, ...leftBorder, ...rightBorder ].includes("*");
-
-    return hasGift && hasBorder;
+    return false;
 }
+
+// function inBox(box) {
+//     const array = [ ...box ];
+    
+//     const upBorder = array[0];
+//     const downBorder = array[array.length - 1];
+//     const rightBorder = [];
+//     const leftBorder = [];
+//     const content = []
+
+//     for (let i = 0; i < array.length; i++) {
+//         if(i !== 0 && i !== (array.length - 1)) {
+//             content.push([ ...array[i] ].slice(1, array.length - 1));
+            
+//             leftBorder.push([...array[i]][0]);
+//             rightBorder.push([...array[i]][[...array[i]].length - 1]);
+//         }
+//     }
+
+//     const hasGift = [ ...content.join(" ") ].includes("*");
+    
+//     const hasBorder = ![ ...upBorder, ...downBorder, ...leftBorder, ...rightBorder ].includes("*");
+
+//     return hasGift && hasBorder;
+// }
 
 console.log(inBox([
     "###",
