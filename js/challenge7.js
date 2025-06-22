@@ -12,19 +12,34 @@
     - Devuelve el string resultante con los paréntesis eliminados, pero con el contenido volteado correctamente.
 */
 
+// function fixPackages(packages) {
+//     if(!packages.includes("(")) return packages; 
+
+//     const lastOpenParenthesis = packages.lastIndexOf("(");
+//     const lastClosedParenthesis = packages.indexOf(")");
+
+//     const inside = packages.slice(lastOpenParenthesis + 1, lastClosedParenthesis);
+
+//     const reversed = inside.split("").reverse().join("");
+
+//     const newPackages = packages.slice(0, lastOpenParenthesis) + reversed + packages.slice(lastClosedParenthesis + 1);
+
+//     return fixPackages(newPackages);
+// }
+
 function fixPackages(packages) {
-    let array = [ ...packages ];
-    
-    while(array.includes("(")) {
-        const openingParenthesisPosition = array.lastIndexOf("(");
-        const closingParenthesisPosition = array.indexOf(")");
+    while(packages.includes("(")) {
+        const lastOpenParenthesis = packages.lastIndexOf("(");
+        const lastClosedParenthesis = packages.indexOf(")");
 
-        const reversed = array.slice(openingParenthesisPosition + 1, closingParenthesisPosition).reverse().join("");
+        const inside = packages.slice(lastOpenParenthesis + 1, lastClosedParenthesis);
 
-        array.splice(openingParenthesisPosition, (closingParenthesisPosition - openingParenthesisPosition + 1), ...reversed);
+        const reversed = inside.split("").reverse().join("");
+
+        packages = packages.slice(0, lastOpenParenthesis) + reversed + packages.slice(lastClosedParenthesis + 1);
     }
 
-    return array.join("");
+    return packages;
 }
 
 console.log(fixPackages('a(cb)de'));
