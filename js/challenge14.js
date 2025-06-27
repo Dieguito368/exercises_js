@@ -16,7 +16,16 @@
 */
 
 function minMovesToStables(reindeer, stables) {
-    return 0
+    const orderedReindeers = reindeer.sort((a, b) => a - b);
+    const orderedStables = stables.sort((a, b) => a - b);
+
+    let movements = 0;
+
+    for (let i = 0; i < reindeer.length; i++) {
+        movements += Math.abs(orderedReindeers[i] - orderedStables[i]); 
+    }
+
+    return movements;
 }
 
 console.log(minMovesToStables([2, 6, 9], [3, 8, 5])); // -> 3
