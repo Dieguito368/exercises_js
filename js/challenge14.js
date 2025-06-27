@@ -16,8 +16,8 @@
 */
 
 function minMovesToStables(reindeer, stables) {
-    const orderedReindeers = reindeer.sort((a, b) => a - b);
-    const orderedStables = stables.sort((a, b) => a - b);
+    const orderedReindeers = [...reindeer].sort((a, b) => a - b);
+    const orderedStables = [...stables].sort((a, b) => a - b);
 
     let movements = 0;
 
@@ -27,6 +27,13 @@ function minMovesToStables(reindeer, stables) {
 
     return movements;
 }
+
+// function minMovesToStables(reindeer, stables) {
+//     const orderedReindeers = [...reindeer].sort((a, b) => a - b);
+//     const orderedStables = [...stables].sort((a, b) => a - b);
+
+//     return orderedReindeers.reduce((acc, number, i) => acc + Math.abs(number - orderedStables[i]), 0);
+// }
 
 console.log(minMovesToStables([2, 6, 9], [3, 8, 5])); // -> 3
 // Explicación:
