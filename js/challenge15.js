@@ -16,33 +16,95 @@
 */
 
 function drawTable(data) {
-    let buffer = "";
-    let border = `+${"-".repeat(5)}+`;
+    let border = "";
+    let head = "";
+    let columns = [];
+    let keys = Object.keys(data[0]);
+
+    const columnsWidths = keys.map(key =>
+        Math.max(
+            key.length,
+            ...data.map(value => value[key].toString().length)
+        )
+    )
+
+    keys.forEach((key, i) => {
+        const columnName = key.charAt(0).toLocaleUpperCase() + key.slice(1);
+
+        border += `+${"-".repeat(columnsWidths[i] + 2)}`;
+
+        head += `| ${columnName.padEnd(columnsWidths[i])} `;
+    });
+
+    border += "+";
+    head += "|";
+
+     for (let row of data) {
+        let column = ""
+        
+        keys.forEach((key, i) => {
+            column += `| ${row[key].toString().padEnd(columnsWidths[i] + 1)}`
+        });
+
+        column += "|";
+
+        columns.push(column);
+    }
+
+    return [ border, head, border, ...columns, border ].join("\n");
+}
+
+/*
+function drawTable(data) {
+    let border = "";
+    let head = "";
+    let columns = [];
 
     let keys = Object.keys(data[0]);
 
-    let lengths = 0;
-    let lengthsNames = 0;
-
     for(let key of keys) {
+        let longer = Math.max(...[ ...new Set([ key.length, ...data.map(value => value[key].toString().length) ]) ]);
 
+        let capitalLetter = key.charAt(0).toLocaleUpperCase();
+        const columnFormat = capitalLetter + key.slice(1);
+
+        head += `| ${columnFormat.padEnd(longer + 1)}`
+
+        border += `+${"-".repeat(longer + 2)}`;
     }
 
-    return lengthsNames;
-}
+     for (let i = 0; i < data.length; i++) {
+        let column = ""
+        
+        for(let key of keys) {
+            let longer = Math.max(...[ ...new Set([ key.length, ...data.map(value => value[key].toString().length) ]) ]);
 
+            column += `| ${data[i][key].toString().padEnd(longer + 1)}`
+        }
+
+        column += "|";
+
+        columns.push(column);
+    }
+
+    border += "+";
+    head += "|";
+
+    return [ border, head, border, columns.join("\n"), border ].join("\n");
+}
+*/
 console.log(drawTable([
     { name: 'Alice', city: 'London' },
     { name: 'Bob', city: 'Paris' },
     { name: 'Charlie', city: 'New York' }
 ]));
-// +---------+-----------+
-// | Name    | City      |
-// +---------+-----------+
-// | Alice   | London    |
-// | Bob     | Paris     |
-// | Charlie | New York  |
-// +---------+-----------+
+// +---------+----------+
+// | Name    | City     |
+// +---------+----------+
+// | Alice   | London   |
+// | Bob     | Paris    |
+// | Charlie | New York |
+// +---------+----------+
 
 console.log(drawTable([
     { gift: 'Doll', quantity: 10 },
