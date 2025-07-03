@@ -37,6 +37,43 @@ function detectBombs(grid) {
     return map;
 }
 
+// function detectBombs(grid) {
+//     const rows = grid.length;
+//     const cols = grid[0].length;
+//     const result = [];
+
+//     const directions = [
+//         [-1, -1], [-1, 0], [-1, 1],
+//         [0, -1],       [0, 1],
+//         [1, -1], [1, 0], [1, 1]     
+//     ]
+
+//     for (let i = 0; i < rows; i++) {
+//         const row = [];
+
+//         for (let j = 0; j < cols; j++) {
+//             let count = 0;
+            
+//             for(let [dx, dy] of directions) {
+//                 const ni = i + dx;
+//                 const nj = j + dy;
+
+//                 if(ni >= 0 && ni < rows && nj >= 0 && nj < cols) {
+//                     if(grid[ni][nj]) {
+//                         count++;
+//                     };
+//                 }
+//             }
+
+//             row.push(count);
+//         }
+
+//         result.push(row);
+//     }
+
+//     return result;
+// }
+
 console.log(detectBombs([
     [ true, false, false ],
     [ false, true, false ],
@@ -62,7 +99,6 @@ console.log(detectBombs([
     [ false, false ],
     [ true, true ]
 ]));
-
 // [
 //   [1, 1],
 //   [4, 4],
